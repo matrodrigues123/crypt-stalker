@@ -1,7 +1,15 @@
 import React from "react";
 import "./Coin.scss";
 
-const Coin = ({ name, image, symbol, price, volume, mktcap }) => {
+const Coin = ({
+  currencySymbol,
+  name,
+  image,
+  symbol,
+  price,
+  volume,
+  mktcap,
+}) => {
   const handleClick = (e) => {
     e.preventDefault();
     console.log("desgraça");
@@ -15,9 +23,18 @@ const Coin = ({ name, image, symbol, price, volume, mktcap }) => {
           <p className="coint-symbol">{symbol.toUpperCase()}</p>
         </div>
         <div className="coin-data">
-          <p className="coin-price">${price}</p>
-          <p className="coin-volume">${volume.toLocaleString()}</p>
-          <p className="coin-mktcap">${mktcap.toLocaleString()}</p>
+          <p className="coin-price">
+            {currencySymbol}
+            {price}
+          </p>
+          <p className="coin-volume">
+            {currencySymbol}
+            {volume.toLocaleString()}
+          </p>
+          <p className="coin-mktcap">
+            {currencySymbol}
+            {mktcap.toLocaleString()}
+          </p>
         </div>
       </div>
     </div>
