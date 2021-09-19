@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import Coin from "./Coin/Coin";
+import utils from "./utils";
 
-const API_KEY =
-  "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=100&page=1&sparkline=false";
-
+const API_KEY = utils.API_KEY
 function App() {
   const [coins, setCoins] = useState([]);
   const [search, setSearch] = useState("");
@@ -40,7 +39,7 @@ function App() {
       {searchedCoins.map((coin) => {
         return (
           <Coin
-            key={coin.id}
+            id={coin.id}
             name={coin.name}
             image={coin.image}
             symbol={coin.symbol}
