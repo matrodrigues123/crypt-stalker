@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
-import Coin from "./Coin/Coin";
-
-const CURRENCY_API =
-  "https://gist.githubusercontent.com/Fluidbyte/2973986/raw/5fda5e87189b066e11c1bf80bbfbecb556cf2cc1/Common-Currency.json";
+import { Coin, LegendBar } from "./Coin/Coin";
+import { CURRENCY_API } from "./utils";
 
 function App() {
   const [coins, setCoins] = useState([]);
@@ -55,10 +53,12 @@ function App() {
           </select>
         </form>
       </div>
+      <LegendBar />
       {searchedCoins.map((coin) => {
         return (
           <Coin
-            key={coin.id}
+            id={coin.id}
+            currency={currency}
             currencySymbol={currencyData.symbol_native}
             name={coin.name}
             image={coin.image}

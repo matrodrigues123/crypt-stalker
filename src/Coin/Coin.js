@@ -1,7 +1,11 @@
-import React from "react";
+import react from "react";
 import "./Coin.scss";
+import GetHistory from "./GetHistory";
+import Modal from "./Modal";
 
-const Coin = ({
+export const Coin = ({
+  id,
+  currency,
   currencySymbol,
   name,
   image,
@@ -10,15 +14,30 @@ const Coin = ({
   volume,
   mktcap,
 }) => {
-  const handleClick = (e) => {
+  const [modalIsOpen, setIsOpen] = react.useState(false);
+
+  const [history, setHistory] = react.useState([]);
+
+  const HandleClick = (e) => {
     e.preventDefault();
-    console.log("desgraça");
+    GetHistory(id, currency)
+      .then((info) => {
+        setHistory(info);
+        setIsOpen(true);
+      })
+      .catch((err) => console.error(err));
   };
   return (
     <div className="coin-container">
+      <Modal
+        modalIsOpen={modalIsOpen}
+        setIsOpen={setIsOpen}
+        history={history}
+        coinName={name}
+      />
       <div className="coin-row">
-        <div className="coin">
-          <img src={image} alt="coin" onClick={handleClick}></img>
+        <div className="coin" onClick={HandleClick}>
+          <img src={image} alt="coin"></img>
           <h1>{name}</h1>
           <p className="coint-symbol">{symbol.toUpperCase()}</p>
         </div>
@@ -41,4 +60,17 @@ const Coin = ({
   );
 };
 
-export default Coin;
+export const LegendBar = () => {
+  return (
+    <div className="coin-container">
+      <div className="coin-row" style={{ height: "2rem" }}>
+        <div className="coin"></div>
+        <div className="coin-data">
+          <p className="coin-price">Price</p>
+          <p className="coin-volume">Volume</p>
+          <p className="coin-mktcap">Market Cap</p>
+        </div>
+      </div>
+    </div>
+  );
+};
