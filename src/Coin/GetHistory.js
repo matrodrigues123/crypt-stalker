@@ -1,5 +1,4 @@
 import axios from "axios"
-import utils from "../utils"
 
 export default async (coin, currency)=>{
     const API_KEY= "https://api.coingecko.com/api/v3"
@@ -8,7 +7,7 @@ export default async (coin, currency)=>{
     
     console.log(res)
     for (let i= 0; i< res.data.length; i++){
-        info.push(res.data[i][1])
+        info.push(res.data[i][4])
     }
     
     
